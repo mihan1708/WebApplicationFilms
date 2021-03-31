@@ -1,0 +1,20 @@
+﻿<div class="sessions">
+    <h3>Сеансы:</h3>
+    @if (Model.Sessions.Count == 0)
+    {<h5>Список сеансов пуст</h5>}
+    else
+        @foreach (Session s in Model.Sessions)
+        {
+            <a asp-action="Session" asp-route-sessionId="@s.Id">
+                <div>
+                    @s.Date.ToString("HH:mm dd MMMM")
+                    @s.Hall.Name
+                    @s.Price руб.
+                </div>
+            </a>
+        }
+    @if (ViewData["Title"] == "Edit")
+    {
+        <a class="btn" asp-action="CreateSession" asp-route-FilmId="@Model.Id"><div>Создать сеанс</div></a>
+    }
+</div>

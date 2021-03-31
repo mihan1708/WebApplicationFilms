@@ -1,0 +1,61 @@
+﻿@model WebApplicationFilms.Models.Film
+
+@{
+    ViewData["Title"] = "Film";
+}
+<link rel="stylesheet" href="~/css/container_images.css" />
+<link rel="stylesheet" href="~/css/FilmPage.css" />
+<link rel="stylesheet" href="~/css/Sessions.css" />
+<div class="film_name">
+    <h2>
+        @Model.Name
+    </h2>
+</div>
+<hr />
+<div class="genre">
+    <h4>
+        @Model.Genre
+    </h4>
+</div>
+<iframe width="560"
+        height="315"
+        src="@Model.UrlTrailer"
+        frameborder="0"
+        allowfullscreen>
+</iframe>
+<div>
+    <hr />
+    @await Html.PartialAsync("_corousel")
+    <dl class="film_info">
+        <div class="description">
+            <b>Описание</b>
+            
+            <p>
+                @Model.Description
+            </p>
+        </div>
+        <div class="great_roles">
+            <b>В главных ролях</b>
+            
+            <p>
+                @Model.GreatRoles
+            </p>
+        </div>
+        <div class="director">
+            <b>Режисёр</b>
+           
+            <p>
+                @Model.Director
+            </p>
+        </div>
+        <div class="duration">
+            <b>Длительность</b>
+            
+            <p>
+                @Model.Duration.TotalMinutes.ToString() мин.
+            </p>
+        </div>
+    </dl>
+</div>
+<hr />
+@await Html.PartialAsync("_sessions")

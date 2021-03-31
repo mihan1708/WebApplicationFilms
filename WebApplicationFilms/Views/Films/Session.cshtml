@@ -1,0 +1,43 @@
+﻿@model WebApplicationFilms.Models.Session
+@{
+    ViewData["Title"] = "Session";
+
+}
+<link rel="stylesheet" href="~/css/MyStyle.css">
+<h1>Сеанс</h1>
+<div class="info-session">
+    <div><b>Дата:</b> @Model.Date.ToString("dd MMMM yyyy")</div>
+    <div><b>Название фильма:</b> @Model.Film.Name</div>
+    <div><b>Жанр фильма:</b> @Model.Film.Genre</div>
+    <div><b>Кинозал:</b> @Model.Hall.Name</div>
+    <div><b>Цена:</b> @Model.Price</div>
+</div>
+<div class="Hall">
+    <table>
+        @for (int i = 1; i <= Model.Hall.CountRows; i++)
+        {
+
+        <tr>
+            @{
+                List<Seat> seatOnRow = Model.Hall.Seats.Where(s => s.NumberRow == i).ToList();
+                foreach (Seat s in seatOnRow)
+                {
+                    if (Model.PurchasedSeats.FirstOrDefault(o => o.Id == s.Id) != null)
+                    {
+                        <td class="BusySeat" id="@s.Id"></td>
+                    }
+                    else
+                    {
+                        <td class="Seat" id="@s.Id"><a asp-controller="Tickets" asp-action="Buy" asp-route-SessionId="@Model.Id" asp-route-SeatId="@s.Id"></a></td>
+                    }
+                }
+            }
+
+        </tr>
+
+        }
+    </table>
+</div>
+<a class="btn btn-sm btn-danger linkBuy" asp-controller="Tickets" asp-action="Buy" asp-route-SessionId="@Model.Id">Оформить заказ</a>
+<script src="~/js/session.js"></script>
+

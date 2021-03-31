@@ -1,0 +1,25 @@
+﻿@model WebApplicationFilms.ViewModels.CreateTicketViewModel
+@{
+    ViewBag.Title = "Добавление нового билета";
+}
+<form asp-action="Buy" asp-controller="Tickets">
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <div class="form-group">
+        
+        <input type="hidden" asp-for="SessionId" value="@Model.SessionId" class="form-control" />
+    </div>
+    <div class="form-group">
+        @foreach (int id in Model.SeatId)
+        {
+            <input type="hidden" asp-for="SeatId" value="@id" class="form-control" />
+        }
+
+    </div>
+    <div class="form-group">
+        
+        <input type="hidden" asp-for="Date" value="@Model.Date" class="form-control" />
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Подтвердить покупку" class="btn btn-outline-secondary" />
+    </div>
+</form>

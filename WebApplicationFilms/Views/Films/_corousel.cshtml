@@ -1,0 +1,37 @@
+﻿<link rel="stylesheet" href="~/css/corousel.css" />
+<div class="corousel">
+    <div class="row">
+        <div class="col-1">
+            <a class="carousel-control-prev" onclick="previous()"  role="button">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Предыдущий</span>
+            </a>
+        </div>
+        <div class="col">
+            <div class="corousel_inner">
+                <div class="row">
+                    @foreach (Image i in Model.Images)
+                    {
+                        <div class="corousel_item col-3">
+                            <div class="content">
+                                <img src="~/Images/@i.Name" />
+                                @if (ViewData["Title"] == "Edit")
+                                {
+                                    <a class="btn btn-sm btn-danger" asp-action="RemoveFileFromServer" asp-route-imageId="@i.Id">Удалить</a>
+                                }
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="col-1">
+            <a class="carousel-control-next" onclick="next()" role="button">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Следующий</span>
+            </a>
+            
+        </div>
+    </div>
+</div>
+<script src="~/js/corousel_script.js"></script>

@@ -1,0 +1,48 @@
+﻿@model IEnumerable<WebApplicationFilms.Models.Session>
+
+@{
+    ViewData["Title"] = "Sessions";
+}
+
+<h1>Сеансы для фильма: @ViewBag.NameFilm</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.Label("Дата сеанса")
+            </th>
+            <th>
+                @Html.Label("Кинозал")
+            </th>
+            <th>
+                @Html.Label("Фильм")
+            </th>
+            <th>
+                @Html.Label("Цена")
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.Label(item.Date.ToString("g"))
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Hall.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Film.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price) руб.
+            </td>
+            <td>
+                <a asp-action="Session" asp-route-id="@item.Id">Подробнее</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

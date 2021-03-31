@@ -1,0 +1,23 @@
+﻿@model WebApplicationFilms.Models.Film
+
+@{
+    ViewData["Title"] = "Film";
+}
+<h3>Выберите файл для загрузки</h3>
+
+<div class="containerImages">
+    @{
+        foreach (Image i in Model.Images)
+        {
+        <div class="itemListFilmsForUser">
+            <img src="~/Images/@i.Name" />
+            <a class="btn btn-sm btn-danger" asp-action="RemoveFileFromServer" asp-route-id="@i.Id">Удалить</a>
+        </div>
+        }
+    }
+    <form asp-action="AddFile" asp-controller="Films" method="post" enctype="multipart/form-data">
+        <input type="file" name="uploadedFile" /><br>
+        <input type="hidden" name="id" value="@Model.Id" />
+        <input type="submit" value="Загрузить" />
+    </form>
+</div>

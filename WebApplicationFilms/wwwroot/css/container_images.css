@@ -1,0 +1,48 @@
+﻿/*Галерея кадров*/
+.container_images {
+    margin: 5px;
+    margin-bottom: 10px;
+    position: relative;
+    display:inline-block;
+    
+}
+
+.item_container_images {
+    display: inline-block;
+    height: 250px;
+    width: 250px;
+    margin: 10px;
+    vertical-align: middle;
+    position: relative;
+
+    transition: 1s; /* Время эффекта */
+}
+
+    .item_container_images:hover {
+        transform: scale(1.2)
+    }
+
+    .item_container_images img {
+        height: 100%;
+        width: 100%;
+        border-radius: 10px;
+        object-fit: cover;
+    }
+
+    .item_container_images form {
+        bottom: 0;
+        position: absolute;
+        background-color: lightgray;
+        border-radius: 10px;
+        border:solid black 1px;
+    }
+
+    .item_container_images a {
+        position: absolute;
+        top: 0;
+        right: 0;
+    }
+
+    .item_container_images input {
+        width: 100%;
+    }

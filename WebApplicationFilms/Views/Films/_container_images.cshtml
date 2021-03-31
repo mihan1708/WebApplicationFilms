@@ -1,0 +1,16 @@
+﻿<div class="container_images">
+    @{
+        foreach (Image i in  Model.Images)
+        {
+           
+            <div class="item_container_images">
+            <img src="~/Images/@i.Name" />
+            @if (ViewData["Title"] == "Edit")
+            {
+                <a class="btn btn-sm btn-danger" asp-action="RemoveFileFromServer" asp-route-imageId="@i.Id">Удалить</a>
+            }
+            </div>
+        }
+    }
+</div>
+

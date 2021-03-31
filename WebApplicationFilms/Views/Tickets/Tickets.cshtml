@@ -1,0 +1,51 @@
+﻿@model IEnumerable<WebApplicationFilms.Models.Ticket>
+
+@{
+    ViewData["Title"] = "Tickets";
+}
+
+<h1>Билеты</h1>
+@if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+{
+
+    <p>
+        <a asp-action="Create">Создать новый билет</a>
+    </p>
+}
+    <table class="table">
+        <thead>
+            <tr>
+                <th>@Html.Label("Время сеанса")</th>
+                <th>@Html.Label("Фильм")</th>
+                <th> @Html.Label("Кинозал")</th>
+                <th> @Html.Label("Место")</th>
+                <th>@Html.Label("Email")</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Session.Date)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Session.Film.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Session.Hall.Name)
+                    </td>
+                    <td>
+                        @Html.Label("ряд: " + item.Seat.NumberRow.ToString() + " место: " + item.Seat.Number.ToString())
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UserEmail)
+                    </td>
+                    <td>
+                        <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>

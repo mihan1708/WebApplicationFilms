@@ -1,0 +1,86 @@
+﻿@model IEnumerable<WebApplicationFilms.Models.Film>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Фильмы</h1>
+<link rel="stylesheet" href="~/css/FilmsPage.css" />
+
+@if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+{
+    <p>
+        <a asp-action="Create">Создать новый</a>
+    </p>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.Label("Имя")
+                </th>
+                <th>
+                    @Html.Label("Жанр")
+                </th>
+                <th>
+                    @Html.Label("Дата выхода")
+                </th>
+                <th>
+                    @Html.Label("Длительность")
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Genre)
+                    </td>
+                    <td>
+                        @Html.Label(item.Release.ToString("dd MMMM yyyy"))
+                    </td>
+                    <td>
+                        @Html.Label(item.Duration.TotalMinutes.ToString()) мин.
+                    </td>
+                    <td>
+                        <div class="EditDetailsDeleteButtons">
+                            <a class="btn btn-sm btn-primary" asp-action="Edit" asp-route-filmId="@item.Id">Редактировать</a>
+                            <a class="btn btn-sm btn-primary" asp-controller="Films" asp-action="FIlm" asp-route-filmId="@item.Id">Подробнее</a>
+                            <a class="btn btn-sm btn-danger" asp-action="Delete" asp-route-filmId="@item.Id">Удалить</a>
+                        </div>
+
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+}
+else
+{
+    <div class="container_films">
+        @foreach (var item in Model)
+        {
+            <a asp-action="Film" asp-route-filmId="@item.Id">
+                <div class="item_container_films">
+                    @{
+                        if (item.Images.Count == 0)
+                        {
+                            <img src="~/Images/defaultImage.png" />
+                        }
+                        else
+                        {<img src="~/Images/@item.Images[0].Name" />}
+                    }
+
+                    <div class="textNameFilm">@item.Name</div>
+                </div>
+            </a>
+        }
+    </div>
+
+}

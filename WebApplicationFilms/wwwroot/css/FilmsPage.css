@@ -1,0 +1,33 @@
+﻿.container_films {
+    margin: 5px;
+    margin-bottom: 10px;
+    position: relative;
+}
+
+.item_container_films {
+    display: inline-block;
+    height: 250px;
+    width: 250px;
+    margin: 10px;
+    vertical-align: top;
+    position: relative;
+    transition: 1s; /* Время эффекта */
+}
+
+    .item_container_films:hover {
+        transform: scale(1.2)
+    }
+
+    .item_container_films img {
+        height: 100%;
+        width: 100%;
+        border-radius: 10px;
+        object-fit: cover;
+    }
+.textNameFilm {
+    word-wrap: break-word;
+    text-align: center;
+    color: black;
+    font-size: 20px;
+    font-weight: bold;
+}

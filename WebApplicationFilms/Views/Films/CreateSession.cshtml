@@ -1,0 +1,49 @@
+﻿@model WebApplicationFilms.ViewModels.CreateSessionViewModel
+
+@{
+    ViewData["Title"] = "CreateSession";
+}
+<link rel="stylesheet" href="~/css/Create_session_page.css" />
+<h3>Создание сеанса</h3>
+
+<hr />
+<div class="session">
+    <form asp-action="CreateSession">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group">
+            <label>Дата:</label>
+            <input asp-for="Date" class="form-control" />
+            <span asp-validation-for="Date" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Price" class="control-label"></label>
+            <input asp-for="Price" class="form-control" />
+            <span asp-validation-for="Price" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label>Кинозал:</label>
+            <select asp-for="HallName" class="form-control">
+                @foreach (Hall h in Model.Halls)
+                {
+                    <option>@h.Name</option>
+                }
+            </select>
+            <span asp-validation-for="HallName" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <input type="hidden" asp-for="FilmName" value="@Model.FilmName" class="form-control" />
+            <span asp-validation-for="FilmName" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Добавить" class="btn btn-primary" />
+        </div>
+    </form>
+</div>
+
+<div>
+    <a onclick="history.back();">Вернуться к редактированию фильма</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

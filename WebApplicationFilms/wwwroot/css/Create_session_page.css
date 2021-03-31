@@ -1,0 +1,12 @@
+﻿.session {
+    text-align: center;
+    width: 20%;
+    margin-left: auto;
+    margin-right: auto;
+}
+.session input{
+    text-align:center;
+}
+.session select{
+    text-align-last:center;
+}

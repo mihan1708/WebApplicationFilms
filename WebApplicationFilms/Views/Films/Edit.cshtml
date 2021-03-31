@@ -1,0 +1,108 @@
+﻿@model WebApplicationFilms.Models.Film
+
+@{
+    ViewData["Title"] = "Edit";
+}
+<link rel="stylesheet" href="~/css/EditPage.css" />
+<link rel="stylesheet" href="~/css/Sessions.css" />
+<link rel="stylesheet" href="~/css/container_images.css" />
+<h3>Редактирование</h3>
+<hr />
+<div>
+    <div class="addImageBlock">
+        <form asp-action="AddFile" asp-controller="Films" method="post" enctype="multipart/form-data">
+            <input type="file" name="uploadedFile" accept="image/*" />
+            <input type="hidden" name="filmId" value="@Model.Id" />
+            <input type="submit" value="Загрузить" class="btn btn-primary" />
+        </form>
+    </div>
+    @await Html.PartialAsync("_corousel")
+    <div class="info_film">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="row">
+                <div class="col">
+                    <div class="form-group">
+                        @Html.Label("Название")
+                        <input asp-for="Name" class="form-control" />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group">
+                        @Html.Label("Жанр")
+                        <input asp-for="Genre" class="form-control" />
+                        <span asp-validation-for="Genre" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="form-group">
+                        @Html.Label("Описание")
+
+                        <textarea asp-for="Description" class="form-control"></textarea>
+                        <span asp-validation-for="Description" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group">
+                        @Html.Label("В главных ролях")
+                        <textarea asp-for="GreatRoles" class="form-control"></textarea>
+                        <span asp-validation-for="GreatRoles" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="form-group">
+                        @Html.Label("Дата выхода")
+                        <input asp-for="Release" class="form-control" />
+                        <span asp-validation-for="Release" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group">
+                        @Html.Label("Длительность")
+                        <input type="time" asp-for="Duration" class="form-control" />
+                        <span asp-validation-for="Duration" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="form-group">
+                        @Html.Label("Режисёр")
+                        <input asp-for="Director" class="form-control" />
+                        <span asp-validation-for="Director" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group">
+                        @Html.Label("Ссылка на трейлер")
+                        <input asp-for="UrlTrailer" class="form-control" />
+                        <span asp-validation-for="UrlTrailer" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="form-group">
+                        <input type="submit" value="Сохранить" class="btn btn-primary" />
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+
+    @await Html.PartialAsync("_sessions")
+
+    <div>
+        <a asp-action="Index">Вернуться к списку фильмов</a>
+    </div>
+</div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
